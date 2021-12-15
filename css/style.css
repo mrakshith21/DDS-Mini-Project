@@ -1,0 +1,176 @@
+body{
+    height: 100vh;
+}
+
+iframe{
+    height: 100%;
+}
+
+.center{
+    text-align: center;
+}
+
+.and-gate{
+    font-size: 0;
+    vertical-align: top;
+}
+
+.center-v{
+    vertical-align: middle;
+}
+
+.font-small{
+    font-size: 20px;
+}
+
+.v-align-top{
+    vertical-align: top;
+}
+.h-100{
+    height: 100%;
+}
+
+.m-3{
+    margin-right: 3px;
+}
+
+.m-5{
+    margin-right: 5px;
+}
+.half-adder-circuit{
+    margin: 30px;
+}
+.or-gate{
+}
+
+.or-gate-img{
+    margin-bottom: 65px;
+    /*position: absolute;*/
+    /*bottom: 20px;*/
+    z-index: 2;
+}
+.and-gate-1{
+    margin-bottom: 30px;
+}
+
+.wire{
+    padding: 0;
+    background-color: black;
+    border: none;
+}
+
+.wire-h{
+    height: 3px;
+    width: 47px;
+    vertical-align: middle;
+}
+
+.w-40{
+    width: 42px;
+}
+
+.wire-label-left{
+
+    margin-left: 1px;
+}
+
+.wire-v{
+    width: 3px;
+    height: 20px;
+    /*margin-top: 11px;*/
+}
+.top-wire{
+    margin: 0px;
+}
+
+.gate-img{
+    height: 70px;
+}
+
+.gate-img-div{
+    vertical-align: top;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.block{
+    display: block;
+}
+
+.center-vh {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.zero-margin-rl{
+    margin: 0px;
+}
+
+.input-wires{
+    width: 60px;
+    vertical-align: top;
+    font-size: 20px;
+}
+
+.output-wire-center{
+    margin-top: 32px;
+}
+
+.wire-v-up{
+    margin-bottom: 50%;
+    height: 35px;
+}
+
+.wire-v-down{
+    margin-top: 32px;
+    height: 35px;
+}
+
+.output-v{
+    /*vertical-align: middle;*/
+    margin-top: 11px;
+}
+.output-wires{
+    vertical-align: top;
+    /*display: flex;*/
+    /*align-items: center;*/
+}
+
+.height{
+    height: 70px;
+}
+
+.extension-wire-down{
+    margin-top: 65px;
+}
+
+.extension-wire{
+    width: 90px;
+}
+
+.extension-wire-down{
+    margin-bottom: 65px;
+
+}
+
+.sum-label{
+    margin-top: 18px;
+    margin-left: 4px;
+}
+.or-output-wire{
+    margin-bottom: 95px;
+}
+
+.font-zero{
+    font-size: 0;
+}
+
+.carry-output-wire{
+    width: 265px;
+}
