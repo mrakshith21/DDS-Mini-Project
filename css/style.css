@@ -55,8 +55,19 @@ iframe{
 
 .wire{
     padding: 0;
-    background-color: black;
     border: none;
+}
+
+.default{
+    background-color: black;
+}
+
+.stuck-at-zero{
+    background-color: #03A9F4;
+}
+
+.stuck-at-one{
+    background-color: #D50000;
 }
 
 .wire-h{
