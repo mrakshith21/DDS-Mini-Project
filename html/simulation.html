@@ -30,6 +30,12 @@
         const NO_FAULT_REMARK = "No stuck at value detected";
         const FAULT_REMARK = "Stuck at value detected";
 
+        const ON_IMAGE = 'ON.png';
+        const OFF_IMAGE = 'OFF.png';
+
+        const ON_BULB = 'Bulb-On.jfif';
+        const OFF_BULB = 'Bulb-Off.jpg';
+
         let rows = 0, faults = 0;
 
         const classNames = ['default', 'stuck-at-zero', 'stuck-at-one'];
@@ -38,6 +44,8 @@
             'Stuck at zero, click to make it stuck at one',
             'Stuck at one, click to make it fault-free',
         ];
+
+        let X = 0, Y = 0;
 
         function addTitleToButtons(){
             let buttons = document.querySelectorAll('.wire');
@@ -88,7 +96,9 @@
                 wire.classList.add(classNames[nextState]);
                 wire.title = descriptions[nextState];
             });
-            console.log("#faults = " + faults);
+            // console.log("#faults = " + faults);
+            setBulbs();
+            console.log("sum, carry" , getFaultySum(), getFaultyCarry());
         }
 
         function getInputValue(id){
@@ -116,43 +126,37 @@
 
         function getFaultySum(){
 
-            if(!isFault()){
-                return '-';
-            }
             // result of and gate 1
 
-            let x = getFinalValue(getState('x1'), getInputValue('x'));
-            let y_bar = getFinalValue(getState('y1'), 1 - getInputValue('y'));
+            let x = getFinalValue(getState('x1'), X);
+            let y_bar = getFinalValue(getState('y1'), 1 - Y);
             let and1 = x & y_bar;
-            console.log("x = " + x + ", y bar = " + y_bar + ", and 1 = " + and1);
+            // console.log("x = " + x + ", y bar = " + y_bar + ", and 1 = " + and1);
 
             // result of and gate 2
 
-            let x_bar = getFinalValue(getState('x2'), 1 - getInputValue('x'));
-            let y = getFinalValue(getState('y2'), getInputValue('y'));
+            let x_bar = getFinalValue(getState('x2'), 1 - X);
+            let y = getFinalValue(getState('y2'), Y);
             let and2 = x_bar & y;
-            console.log("x bar = " + x_bar + ", y = " + y + ", and 2 = " + and2);
+            // console.log("x bar = " + x_bar + ", y = " + y + ", and 2 = " + and2);
 
             // result of or gate
             and1 = getFinalValue(getState('c1'), and1);
             and2 = getFinalValue(getState('c2'), and2);
             let sum = getFinalValue(getState('s'), and1 | and2);
 
-            console.log("sum = " + sum);
+            // console.log("sum = " + sum);
 
             return sum;
         }
 
         function getFaultyCarry(){
 
-            if(!isFault()){
-                return '-';
-            }
-            let x = getFinalValue(getState('x3'), getInputValue('x'));
-            let y = getFinalValue(getState('y3'), getInputValue('y'));
-            let carry = getFinalValue(getState('c'), x | y);
+            let x = getFinalValue(getState('x3'), X);
+            let y = getFinalValue(getState('y3'), Y);
+            let carry = getFinalValue(getState('c'), x & y);
 
-            console.log("Carry = " + carry);
+            console.log("Carry = ", x, y, carry);
             return carry;
         }
 
@@ -167,8 +171,8 @@
 
         function addEntry(){
             rows++;
-            let x = getInputValue('x');
-            let y = getInputValue('y');
+            let x = X;
+            let y = Y;
             console.log(x + " " + y);
             let sum = x ^ y;
             let carry = x & y;
@@ -186,6 +190,53 @@
                     + '</tr>';
 
         }
+
+        function setBulb(id, state){
+            let element = document.getElementById(id);
+            if(state === 1){
+                console.log(id, "is", state);
+                element.setAttribute('src', 'images/' + ON_BULB);
+            }
+            else {
+                element.setAttribute('src', 'images/' + OFF_BULB);
+            }
+        }
+
+        function toggle(id){
+            let element = document.getElementById(id);
+            let image = element.getAttribute('src');
+
+            console.log(image);
+            if(image === 'images/' +  OFF_IMAGE){
+                element.setAttribute('src', 'images/' + ON_IMAGE);
+            }
+            else{
+                element.setAttribute('src', 'images/' + OFF_IMAGE);
+            }
+            if(id === 'x'){
+                X = 1 - X;
+            }
+            else{
+                Y = 1 - Y;
+            }
+            console.log(X, Y);
+            console.log("sum, carry" , getFaultySum(), getFaultyCarry());
+
+            setBulbs();
+        }
+
+        function setBulbs(){
+
+            setBulb('sum-bulb', getFaultySum());
+            setBulb('carry-bulb', getFaultyCarry());
+        }
+        function getSum(){
+            return X ^ Y;
+        }
+
+        function getCarry(){
+            return X & Y
+        }
     </script>
 </head>
 <body onload="addTitleToButtons()">
@@ -194,12 +245,16 @@
 
         <div class="input inline-block">
             <div class="">
-                <input type="checkbox" class="" id="x">
                 <label>X</label>
+                <div class="gate-img-div inline-block height">
+                    <img id="x" src="images/OFF.png" class="on-off" onclick="toggle(this.id)">
+                </div>
             </div>
             <div class="">
-                <input type="checkbox" class="" id="y">
                 <label>Y</label>
+                <div class="gate-img-div inline-block height">
+                    <img id="y" src="images/OFF.png" class="on-off " onclick="toggle(this.id)">
+                </div>
             </div>
 
 
@@ -260,15 +315,17 @@
                 <div class="inline-block">
                     <div class="">
                         <div class="gate-img-div">
-                            <img src="images/OR.png" class="gate-img or-gate-img">
+                            <img src="images/OR1.png" class="gate-img or-gate-img">
                         </div>
                     </div>
                 </div>
                 <div class="inline-block ">
                     <div class="">
-                        <button name="s" class="wire-h output-wire-center or-output-wire wire default wire wire default v-align-top" onclick="changeState(this.name)"></button>
+                        <button name="s" class="wire-h output-wire-center or-output-wire wire default wire wire default" onclick="changeState(this.name)"></button>
                         <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                        <label class="font-small sum-label v-align-top">Sum</label>
+                        <div class="v-align-top inline-block ">
+                            <img id="sum-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
+                        </div>
 
                     </div>
                 </div>
@@ -287,15 +344,18 @@
                     <div class="inline-block output-wires height">
                         <button name="c" class="wire-h output-wire-center wire wire default carry-output-wire" onclick="changeState(this.name)"></button>
                         <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                        <div class="v-align-top inline-block ">
+                            <img id="carry-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
+                        </div>
                     </div>
-                    <label class="font-small sum-label v-align-top">Carry</label>
+
 
 
                 </div>
             </div>
         </div>
 
-        <div class=" inline-block ">
+        <div class="truth-table-div inline-block ">
             <div class="add-reset-button-div">
                 <button class="btn btn-primary add-button" onclick="addEntry()">Add</button>
                 <button class="btn btn-primary reset-button" onclick="reset()">Reset</button>
