@@ -37,8 +37,15 @@ iframe{
 .m-5{
     margin-right: 5px;
 }
+.input{
+    margin-top: 40px;
+    vertical-align: top;
+}
+
 .half-adder-circuit{
     margin: 30px;
+    position: relative;
+    vertical-align: top;
 }
 .or-gate{
 }
@@ -63,11 +70,11 @@ iframe{
 }
 
 .stuck-at-zero{
-    background-color: #03A9F4;
+    background-color: lightgray;
 }
 
 .stuck-at-one{
-    background-color: #D50000;
+    background-color: #03A9F4;
 }
 
 .wire-h{
@@ -184,4 +191,46 @@ iframe{
 
 .carry-output-wire{
     width: 265px;
+}
+
+.truth-table{
+    font-size: small;
+    overflow: auto;
+    height: 300px;
+    border: 1px solid #cdb2b2;
+}
+
+.table-heading{
+    padding: 5px;
+}
+
+.add-button{
+    margin-right: 10px;
+}
+
+.reset-button{
+    padding: 5px;
+}
+
+.add-reset-button-div{
+    margin: 10px 0px;
+    ;
+}
+
+th{
+    /*border: 1px solid grey;*/
+    padding: 5px !important;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    padding: 5px 10px !important;
+}
+
+td{
+    border: 1px solid lightgray;
+    padding: 3px 5px    ;
+}
+
+
+tbody{
+    background-color: white;
 }

@@ -7,7 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/sidebar-style.css" />
 
@@ -20,6 +26,11 @@
 
         const STUCK_AT_ZERO_COLOR = '#03A9F4';
         const STUCK_AT_ONE_COLOR = '#D50000';
+
+        const NO_FAULT_REMARK = "No stuck at value detected";
+        const FAULT_REMARK = "Stuck at value detected";
+
+        let rows = 0, faults = 0;
 
         const classNames = ['default', 'stuck-at-zero', 'stuck-at-one'];
         const descriptions = [
@@ -36,7 +47,8 @@
             })
         }
 
-        function getState(classList){
+        function getState(name){
+            let classList = document.getElementsByName(name)[0].classList;
             if(classList.contains(DEFAULT_CLASS)){
                 return DEFAULT;
             }
@@ -45,114 +57,284 @@
             }
             return STUCK_AT_ONE;
         }
+
+        function decrementFaults(){
+            if(faults > 0){
+                faults--;
+            }
+        }
+
+        function incrementFaults(){
+            faults++;
+        }
+
+        function isFault(){
+            return faults > 0;
+        }
         
         function changeState(name){
             let wires = document.getElementsByName(name);
-            let state = getState(wires[0].classList);
+            let state = getState(name);
+            if(state === DEFAULT){
+                incrementFaults();
+            }
+            else if(state === STUCK_AT_ONE){
+                decrementFaults();
+            }
             console.log(name[0] + ' : ' + classNames[state]);
             let nextState = (state + 1) % 3;
             wires.forEach(wire => {
                 wire.classList.remove(classNames[state]);
                 wire.classList.add(classNames[nextState]);
                 wire.title = descriptions[nextState];
-            })
+            });
+            console.log("#faults = " + faults);
+        }
+
+        function getInputValue(id){
+            if(document.getElementById(id).checked){
+                return 1;
+            }
+            return 0;
+        }
+
+        function isFaultyWire(name){
+            return !(getState(document.getElementsByName(name)) === DEFAULT)
+        }
+
+        function getFinalValue(state, val){
+            if(state === DEFAULT){
+                return val;
+            }
+            else if(state === STUCK_AT_ZERO){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+
+        function getFaultySum(){
+
+            if(!isFault()){
+                return '-';
+            }
+            // result of and gate 1
+
+            let x = getFinalValue(getState('x1'), getInputValue('x'));
+            let y_bar = getFinalValue(getState('y1'), 1 - getInputValue('y'));
+            let and1 = x & y_bar;
+            console.log("x = " + x + ", y bar = " + y_bar + ", and 1 = " + and1);
+
+            // result of and gate 2
+
+            let x_bar = getFinalValue(getState('x2'), 1 - getInputValue('x'));
+            let y = getFinalValue(getState('y2'), getInputValue('y'));
+            let and2 = x_bar & y;
+            console.log("x bar = " + x_bar + ", y = " + y + ", and 2 = " + and2);
+
+            // result of or gate
+            and1 = getFinalValue(getState('c1'), and1);
+            and2 = getFinalValue(getState('c2'), and2);
+            let sum = getFinalValue(getState('s'), and1 | and2);
+
+            console.log("sum = " + sum);
+
+            return sum;
+        }
+
+        function getFaultyCarry(){
+
+            if(!isFault()){
+                return '-';
+            }
+            let x = getFinalValue(getState('x3'), getInputValue('x'));
+            let y = getFinalValue(getState('y3'), getInputValue('y'));
+            let carry = getFinalValue(getState('c'), x | y);
+
+            console.log("Carry = " + carry);
+            return carry;
+        }
+
+        function getRemark(){
+            return (faults === 0) ? NO_FAULT_REMARK : FAULT_REMARK;
+        }
+
+        function reset(){
+            document.getElementById('truth-table-body').innerHTML = '';
+            rows = 0;
+        }
+
+        function addEntry(){
+            rows++;
+            let x = getInputValue('x');
+            let y = getInputValue('y');
+            console.log(x + " " + y);
+            let sum = x ^ y;
+            let carry = x & y;
+            let truthTable = document.getElementById('truth-table-body');
+            truthTable.innerHTML +=
+                    '<tr class="center">' +
+                        '<td>' + rows + '</td>\n' +
+                        '<td>' + x + '</td>\n' +
+                        '<td >' + y + '</td>\n' +
+                        '<td >' + sum + '</td>\n' +
+                        '<td>' + carry + '</td>\n' +
+                        '<td>' + getFaultySum() + '</td>\n' +
+                        '<td>' + getFaultyCarry() + '</td>\n' +
+                        '<td>' + getRemark() + '</td>'
+                    + '</tr>';
+
         }
     </script>
 </head>
 <body onload="addTitleToButtons()">
 
     <div class="container-fluid">
-    </div>
 
-    <div class="half-adder-circuit">
-        <div class="inline-block">
-            <div class="and-gate and-gate-1">
-                <div class="input-wires inline-block height">
-                    <div class="block top-wire"><label class="">X</label><button class="wire-h wire-label-left wire wire default"  name="x1" onclick="changeState(this.name)"></button></div>
-                    <div class=""><label class="">Y'</label><button class="wire-h w-40 wire wire default wire-label-left" name="y1" onclick="changeState(this.name)"></button></div>
-                </div>
-                <div class="gate-img-div inline-block height">
-                    <img src="images/AND.png" class="gate-img ">
-                </div>
-                <div class="inline-block output-wires height">
-                    <button class="wire-h output-wire-center wire wire default"  name="c1" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-                <div class="inline-block output-wires height">
-                    <button class="wire-v wire wire default wire-v-down output-wire-center" name="c1" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-
-                <div class="inline-block  height">
-                    <button class="wire-h extension-wire wire default extension-wire-down wire wire default"  name="c1" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-
+        <div class="input inline-block">
+            <div class="">
+                <input type="checkbox" class="" id="x">
+                <label>X</label>
+            </div>
+            <div class="">
+                <input type="checkbox" class="" id="y">
+                <label>Y</label>
             </div>
 
-            <div class="and-gate and-gate-2 inline-block">
-                <div class="input-wires inline-block height">
-                    <div class="block top-wire"><label>X'</label><button name="x2" class="wire-h w-40 wire-label-left wire wire default"  onclick="changeState(this.name)"></button></div>
-                    <div class=""><label>Y</label><button name="y2" class="wire-h wire wire default wire-label-left" onclick="changeState(this.name)"></button></div>
-                </div>
-                <div class="gate-img-div inline-block height">
-                    <img src="images/AND.png" class="gate-img ">
-                </div>
-                <div class="inline-block output-wires height">
-                    <button name="c2" class="wire-h output-wire-center wire wire default" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-                <div class="inline-block output-wires height">
-                    <button name="c2" class="wire-v-up wire-v wire wire default" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-
-                <div class="inline-block  height">
-                    <button name="c2" class="wire-h extension-wire wire default extension-wire-up wire wire default" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-
-            </div>
 
         </div>
-
-        <div class="inline-block font-zero">
+        <div class="half-adder-circuit inline-block">
             <div class="inline-block">
-                <div class="">
-                    <div class="gate-img-div">
-                        <img src="images/OR.png" class="gate-img or-gate-img">
+                <div class="and-gate and-gate-1">
+                    <div class="input-wires inline-block height">
+                        <div class="block top-wire"><label class="">X</label><button class="wire-h wire-label-left wire wire default"  name="x1" onclick="changeState(this.name)"></button></div>
+                        <div class=""><label class="">Y'</label><button class="wire-h w-40 wire wire default wire-label-left" name="y1" onclick="changeState(this.name)"></button></div>
+                    </div>
+                    <div class="gate-img-div inline-block height">
+                        <img src="images/AND.png" class="gate-img ">
+                    </div>
+                    <div class="inline-block output-wires height">
+                        <button class="wire-h output-wire-center wire wire default"  name="c1" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+                    <div class="inline-block output-wires height">
+                        <button class="wire-v wire wire default wire-v-down output-wire-center" name="c1" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+
+                    <div class="inline-block  height">
+                        <button class="wire-h extension-wire wire default extension-wire-down wire wire default"  name="c1" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+
+                </div>
+
+                <div class="and-gate and-gate-2 inline-block">
+                    <div class="input-wires inline-block height">
+                        <div class="block top-wire"><label>X'</label><button name="x2" class="wire-h w-40 wire-label-left wire wire default"  onclick="changeState(this.name)"></button></div>
+                        <div class=""><label>Y</label><button name="y2" class="wire-h wire wire default wire-label-left" onclick="changeState(this.name)"></button></div>
+                    </div>
+                    <div class="gate-img-div inline-block height">
+                        <img src="images/AND.png" class="gate-img ">
+                    </div>
+                    <div class="inline-block output-wires height">
+                        <button name="c2" class="wire-h output-wire-center wire wire default" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+                    <div class="inline-block output-wires height">
+                        <button name="c2" class="wire-v-up wire-v wire wire default" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+
+                    <div class="inline-block  height">
+                        <button name="c2" class="wire-h extension-wire wire default extension-wire-up wire wire default" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="inline-block font-zero">
+                <div class="inline-block">
+                    <div class="">
+                        <div class="gate-img-div">
+                            <img src="images/OR.png" class="gate-img or-gate-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block ">
+                    <div class="">
+                        <button name="s" class="wire-h output-wire-center or-output-wire wire default wire wire default v-align-top" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                        <label class="font-small sum-label v-align-top">Sum</label>
+
                     </div>
                 </div>
             </div>
-            <div class="inline-block ">
-                <div class="">
-                    <button name="s" class="wire-h output-wire-center or-output-wire wire default wire wire default v-align-top" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                    <label class="font-small sum-label v-align-top">Sum</label>
+
+            <div>
+
+                <div class="and-gate and-gate-2 inline-block">
+                    <div class="input-wires inline-block height">
+                        <div class="block top-wire"><label>X</label><button name="x3" class="wire-h wire-label-left wire default" onclick="changeState(this.name)"></button></div>
+                        <div class=""><label>Y</label><button name="y3" class="wire-h wire wire wire default wire-label-left" onclick="changeState(this.name)"></button></div>
+                    </div>
+                    <div class="gate-img-div inline-block height">
+                        <img src="images/AND.png" class="gate-img ">
+                    </div>
+                    <div class="inline-block output-wires height">
+                        <button name="c" class="wire-h output-wire-center wire wire default carry-output-wire" onclick="changeState(this.name)"></button>
+                        <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
+                    </div>
+                    <label class="font-small sum-label v-align-top">Carry</label>
+
 
                 </div>
             </div>
         </div>
 
-        <div>
+        <div class=" inline-block ">
+            <div class="add-reset-button-div">
+                <button class="btn btn-primary add-button" onclick="addEntry()">Add</button>
+                <button class="btn btn-primary reset-button" onclick="reset()">Reset</button>
 
-            <div class="and-gate and-gate-2 inline-block">
-                <div class="input-wires inline-block height">
-                    <div class="block top-wire"><label>X</label><button name="x3" class="wire-h wire-label-left wire default" onclick="changeState(this.name)"></button></div>
-                    <div class=""><label>Y</label><button name="y3" class="wire-h wire wire wire default wire-label-left" onclick="changeState(this.name)"></button></div>
-                </div>
-                <div class="gate-img-div inline-block height">
-                    <img src="images/AND.png" class="gate-img ">
-                </div>
-                <div class="inline-block output-wires height">
-                    <button name="c" class="wire-h output-wire-center wire wire default carry-output-wire" onclick="changeState(this.name)"></button>
-                    <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                </div>
-                <label class="font-small sum-label v-align-top">Carry</label>
-
+            </div>
+            <div class="table-heading text-white bg-danger center">
+                <label>TRUTH TABLE</label>
+            </div>
+            <div class="truth-table inline-block table-div">
+                <table class="" id="truth-table">
+                    <thead class="table-heading">
+                        <tr class="center">
+                            <th colspan="3"></th>
+                            <th colspan="2">Actual</th>
+                            <th colspan="2">Fault</th>
+                            <th ></th>
+                        </tr>
+                    </thead>
+                    <thead class="table-heading">
+                        <tr class="center">
+                            <th >#</th>
+                            <th >X</th>
+                            <th >Y</th>
+                            <th >Sum</th>
+                            <th >Carry</th>
+                            <th >Sum</th>
+                            <th >Carry</th>
+                            <th style="width: 187px">Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody id="truth-table-body">
+                    </tbody>
+                </table>
 
             </div>
         </div>
+
     </div>
+
+
 </body>
 </html>
