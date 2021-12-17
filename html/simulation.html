@@ -24,8 +24,8 @@
         const DEFAULT = 0, STUCK_AT_ZERO = 1, STUCK_AT_ONE = 2;
         const DEFAULT_CLASS = 'default', STUCK_AT_ZERO_CLASS = 'stuck-at-zero', STUCK_AT_ONE_CLASS = 'stuck-at-one';
 
-        const STUCK_AT_ZERO_COLOR = '#03A9F4';
-        const STUCK_AT_ONE_COLOR = '#D50000';
+        // const STUCK_AT_ZERO_COLOR = '#03A9F4';
+        // const STUCK_AT_ONE_COLOR = '#D50000';
 
         const NO_FAULT_REMARK = "No stuck at value detected";
         const FAULT_REMARK = "Stuck at value detected";
@@ -99,13 +99,6 @@
             // console.log("#faults = " + faults);
             setBulbs();
             console.log("sum, carry" , getFaultySum(), getFaultyCarry());
-        }
-
-        function getInputValue(id){
-            if(document.getElementById(id).checked){
-                return 1;
-            }
-            return 0;
         }
 
         function isFaultyWire(name){
@@ -256,8 +249,6 @@
                     <img id="y" src="images/OFF.png" class="on-off " onclick="toggle(this.id)">
                 </div>
             </div>
-
-
         </div>
         <div class="half-adder-circuit inline-block">
             <div class="inline-block">
@@ -354,9 +345,6 @@
                             <img id="carry-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -395,12 +383,8 @@
                     <tbody id="truth-table-body">
                     </tbody>
                 </table>
-
             </div>
         </div>
-
     </div>
-
-
 </body>
 </html>
