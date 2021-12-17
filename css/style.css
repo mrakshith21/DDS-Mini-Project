@@ -13,6 +13,7 @@ iframe{
 .and-gate{
     font-size: 0;
     vertical-align: top;
+    margin-bottom: 30px;
 }
 
 .center-v{
@@ -46,6 +47,7 @@ iframe{
     margin: 30px;
     position: relative;
     vertical-align: top;
+    font-size: 16px;
 }
 .or-gate{
 }
@@ -140,6 +142,10 @@ iframe{
     margin-top: 32px;
 }
 
+.sum-wire-center{
+    margin-top: 0px;
+}
+
 .wire-v-up{
     margin-bottom: 50%;
     height: 35px;
@@ -169,7 +175,7 @@ iframe{
 }
 
 .extension-wire{
-    width: 90px;
+    width: 105px;
 }
 
 .extension-wire-down{
@@ -178,11 +184,31 @@ iframe{
 }
 
 .sum-label{
-    margin-top: 18px;
-    margin-left: 4px;
+    font-size: 15px;
+    display: block;
+    margin-top: 0.1em;
+
+    /*margin-bottom: 0px;*/
+}
+
+.carry-label{
+    font-size: 15px;
+    display: block;
+    margin-top: 0.1em;
+    text-align: right;
+    margin-right: 15px;
+
+    /*margin-bottom: 0px;*/
 }
 .or-output-wire{
-    margin-bottom: 95px;
+    margin-bottom: 63px;
+    width: 65px !important;
+}
+
+
+.sum-bulb{
+    margin-bottom: 91px;
+    height: 35px !important;
 }
 
 .font-zero{
@@ -190,7 +216,8 @@ iframe{
 }
 
 .carry-output-wire{
-    width: 265px;
+    width: 278px;
+    margin-top: 0;;
 }
 
 .truth-table{
@@ -245,4 +272,10 @@ tbody{
 
 .bulb-img{
     height: 35px ;
+}
+
+.absolute{
+    position: absolute;
+    top: 50px;
+    left: 280px;
 }

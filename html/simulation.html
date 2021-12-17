@@ -311,7 +311,7 @@
 
             </div>
 
-            <div class="inline-block font-zero">
+            <div class="inline-block font-zero absolute">
                 <div class="inline-block">
                     <div class="">
                         <div class="gate-img-div">
@@ -319,14 +319,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="inline-block ">
-                    <div class="">
-                        <button name="s" class="wire-h output-wire-center or-output-wire wire default wire wire default" onclick="changeState(this.name)"></button>
+                <div class="inline-block">
+                    <div class="inline-block">
+                        <label class="sum-label center">Sum</label>
+                        <button name="s" class="wire-h sum-wire-center or-output-wire wire default wire wire default" onclick="changeState(this.name)"></button>
                         <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
-                        <div class="v-align-top inline-block ">
-                            <img id="sum-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
-                        </div>
 
+
+                    </div>
+                    <div class="v-align-top inline-block ">
+                        <img id="sum-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
                     </div>
                 </div>
             </div>
@@ -342,7 +344,11 @@
                         <img src="images/AND.png" class="gate-img ">
                     </div>
                     <div class="inline-block output-wires height">
-                        <button name="c" class="wire-h output-wire-center wire wire default carry-output-wire" onclick="changeState(this.name)"></button>
+                        <div class="inline-block">
+                            <label class="carry-label ">Carry</label>
+                            <button name="c" class="wire-h wire wire default carry-output-wire" onclick="changeState(this.name)"></button>
+
+                        </div>
                         <!--                <button class="wire-v wire wire default output-v inline-block"></button>-->
                         <div class="v-align-top inline-block ">
                             <img id="carry-bulb" src="images/Bulb-Off.jpg" class="bulb-img v-align-top">
