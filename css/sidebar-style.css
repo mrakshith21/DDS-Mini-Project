@@ -1,0 +1,36 @@
+.sidebar{
+    background-color: #F5F5F5;
+    width: 15% ;
+    height: 100vh;
+    margin-left: 0;
+}
+
+.section-link{
+    text-decoration: none;
+    color: black;
+    font-size: large;
+}
+.section-link:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.selected{
+    color: white !important;
+    background-color: #009688;
+}
+
+.selected:hover, .selected:focus{
+    color: white !important;
+    background-color: #009688 !important;
+}
+.section{
+    padding: 8px;
+}
+
+.section:hover{
+    background-color:  #E0E0E0;
+}
+
+.section:active, section:focus{
+}
