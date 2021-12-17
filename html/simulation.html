@@ -153,10 +153,28 @@
             return carry;
         }
 
-        function getRemark(){
-            return (faults === 0) ? NO_FAULT_REMARK : FAULT_REMARK;
+        function generate(){
+            const Avals = [0,0,1,1];
+            const Bvals = [0,1,0,1];
+            let x_init = X;
+            let y_init = Y;
+            for(let i = 0; i<4; i++){
+                X = Avals[i];
+                Y = Bvals[i];
+                addEntry();
+            }
+            X = x_init;
+            Y = y_init;
         }
 
+        function getRemark(){
+            let x = X;
+            let y = Y;
+            sum = x^y;
+            carry = x & y;
+            return (sum === getFaultySum() && carry === getFaultyCarry()) ? NO_FAULT_REMARK : FAULT_REMARK;
+        }
+        
         function reset(){
             document.getElementById('truth-table-body').innerHTML = '';
             rows = 0;
@@ -353,6 +371,8 @@
             <div class="add-reset-button-div">
                 <button class="btn btn-primary add-button" onclick="addEntry()">Add</button>
                 <button class="btn btn-primary reset-button" onclick="reset()">Reset</button>
+                <button class="btn btn-primary generate-button" onclick="generate()">Generate</button>
+
 
             </div>
             <div class="table-heading text-white bg-danger center">

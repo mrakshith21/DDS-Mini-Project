@@ -67,6 +67,7 @@ iframe{
     border: none;
 }
 
+
 .default{
     background-color: black;
 }
@@ -240,12 +241,16 @@ iframe{
 }
 
 .reset-button{
+    margin-right: 0.7em;
     padding: 0.4em;
 }
 
 .add-reset-button-div{
     margin: 0.7em 0;
     ;
+}
+.generate-button{
+    padding: 0.4em;
 }
 
 th{
