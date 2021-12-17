@@ -72,7 +72,6 @@ iframe{
     background-color: black;
 }
 
-
 .stuck-at-zero{
     background-color: lightgray;
 }
@@ -101,8 +100,6 @@ iframe{
     height: 20px;
     /*margin-top: 11px;*/
 }
-
-
 .top-wire{
     margin: 0px;
 }
@@ -255,6 +252,7 @@ iframe{
 .generate-button{
     padding: 0.4em;
 }
+
 th{
     /*border: 1px solid grey;*/
     padding: 0.4em !important;

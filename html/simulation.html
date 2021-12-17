@@ -181,7 +181,7 @@
             carry = x & y;
             return (sum === getFaultySum() && carry === getFaultyCarry()) ? NO_FAULT_REMARK : FAULT_REMARK;
         }
-
+        
         function reset(){
             document.getElementById('truth-table-body').innerHTML = '';
             rows = 0;
@@ -384,6 +384,7 @@
                 <button class="btn btn-primary add-button" onclick="addEntry()">Add</button>
                 <button class="btn btn-primary reset-button" onclick="reset()">Reset</button>
                 <button class="btn btn-primary generate-button" onclick="generate()">Generate</button>
+
 
             </div>
             <div class="table-heading text-white bg-danger center">
