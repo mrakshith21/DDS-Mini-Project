@@ -2,21 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Theory</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/banner.css" />
     <link rel="stylesheet" type="text/css" href="../css/sidebar-style.css" />
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <nav class="navbar header">
+        <div class="row text-white navbar-row ">
+            <div class="col-2">
+                <img src="images/NITK.svg" class="inline-block nitk-logo">
+                <div class="inline-block banner-text">
+                    <h6 class="banner-text inline-block">NIT Surathkal</h6>
+                    <h6 class="banner-text">DDS Mini Project</h6>
+                </div>
+
+            </div>
+            <div class="col-9 center navbar-header">
+                <h6 class="center inline-block navbar-header">
+                    Detection of SA0 and SA1 faults on a HALF-ADDER circuit
+                </h6>
+            </div>
+
+        </div>
+    </nav>
     <div class="container-fluid">
-        <div class="sidebar">
-<!--            <iframe src="sidebar.html" ></iframe>-->
+
+        <div class="sidebar inline-block">
+<!--            <iframe src="sidebar.html"></iframe>-->
             <div class="section">
                 <a href="index.html" class="section-link">Aim</a>
             </div>
@@ -30,6 +50,99 @@
                 <a href="simulation.html" class="section-link">Simulation</a>
             </div>
         </div>
+
+        <div class = 'text-body'>
+            <div>
+                <h3>
+                <b>
+                    Introduction:
+                </b>
+                </h3>
+                <hr>
+                
+                
+            </div>
+            <div class = "text-regular">
+                <p>
+                    A stuck-at fault is an abstract fault model used in post manufacturing process by fault simulators to mimic a manufacturing defect within an integrated circuit. 
+                    Individual signals and pins are assumed to be stuck at Logical '1' or '0'. 
+                    For example, an input is tied to a logical 1 state during test generation to assure that a manufacturing defect with that type of behavior can be found with a specific test pattern. 
+                    Not all faults can be analyzed using the stuck-at fault model.
+                </p>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h3>
+                <b>
+                    Fault Detection:
+                </b>
+                </h3>
+                <hr>
+                
+                
+            </div>
+            <div class = "text-regular">
+                <p>
+                    Ideally all possible inputs and outputs need to be tested to make sure there are no faults in the circuit. However in most cases this is impractical. In our single half adder circuit, we have 4 possible inputs and outputs, but if we take for example, a circuit that can add two 32 bit numbers, then we will need to check 2<sub style = "vertical-align: super;font-size: x-small;">32</sub> * 2<sub style = "vertical-align: super;font-size: x-small;">32</sub> = 2<sub style = "vertical-align: super;font-size: x-small;">64</sub> inputs which is impractical. Hence, in complex circuits, test vectors are used which are input sequences that give different outputs if there is a fault present. A single test vector could detect many faults thus we don’t need to check all input sequences. There are disadvantages to this process, that is all possible fault locations in the circuit needs to be known else a fault could go undetected by existing test vectors. In our case since we have a simple circuit it is possible to check all input sequences and their respective outputs for any faults.
+                </p>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h3>
+                <b>
+                    Half-Adder:
+                </b>
+                </h3>
+                <hr>
+                
+                
+            </div>
+            <div class = "text-regular">
+                <p>
+                    Half adder is a combinational circuit that performs simple addition of two binary numbers. If we assume A and B as the two bits whose addition is to be performed,the circuit diagram and a truth table for half adder with A, B as inputs and Sum, Carry outputs can be tabulated as follows.
+                </p>
+                <center>
+                <img src = "images/circuit.png", style = "max-width: 400px;max-height: 200px;">
+                <img src = "images/truthtable.png", style = "max-width: 400px;max-height: 200px;">
+
+                </center>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h3>
+                <b>
+                    Fault sites in Half Adder:
+                </b>
+                </h3>
+                <hr>
+                
+                
+            </div>
+            <div class = "text-regular">
+                <center>
+                <img src = "images/faults.jpeg", style = "max-height: 300px;">
+                </center>
+                <p>
+                    In our circuit, there are 10 signal lines and thus 10 potential fault sites and 20 possible faults. The truth table of the outputs of the circuit for each individual faults is as follows. Note there may be more than one fault but we concentrate more on individual faults as more than one fault is easier to detect in almost all cases. In the table, the outputs that differ from the output of the half adder due to faults is marked in red. For a given input, it is able to detect all those faults whose outputs are marked in red for that input. In our circuit, inorder to detect all faults we have to check all 4 inputs. 
+
+                </p>
+                <center>
+                <img src = "images/t1.png", style = "max-height: 300px;margin-bottom: 15px;">
+                <img src = "images/t2.png", style = "max-height: 300px;">
+                </center>
+                <br>
+                <p>
+                    Thus the input X = 0, Y = 0 can detect the faults: Sxi1, Syii1, Sci1, Scii1, Sciii1, Eci0 and Eci1. This is how fault detection is done.
+                </p>
+            </div>
+            <br>
+            <br>
+            
+        </div>
+       
     </div>
 </body>
 </html>

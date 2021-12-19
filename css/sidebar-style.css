@@ -1,14 +1,18 @@
 .sidebar{
     background-color: #F5F5F5;
     width: 15% ;
-    height: 100vh;
+    height: 100%;
     margin-left: 0;
+    vertical-align: top;
+    position: fixed;
 }
 
 .section-link{
     text-decoration: none;
     color: black;
     font-size: large;
+    padding-left: 10px;
+    width: 100%;
 }
 .section-link:hover{
     text-decoration: none;
