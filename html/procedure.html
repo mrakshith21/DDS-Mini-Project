@@ -4,18 +4,38 @@
     <meta charset="UTF-8">
     <title>Procedure</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/banner.css" />
     <link rel="stylesheet" type="text/css" href="../css/sidebar-style.css" />
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <nav class="navbar brb-bg">
+        <div class="row text-white navbar-row ">
+            <div class="col-2">
+                <img src="images/BRB.PNG" class="inline-block brb">
+                <div class="inline-block banner-text">
+                    <h6 class="banner-text inline-block">NIT Surathkal</h6>
+                    <h6 class="banner-text">DDS Mini Project</h6>
+                </div>
+
+            </div>
+            <div class="col-9 center navbar-header">
+                <h6 class="center inline-block navbar-header">
+                    Detection of SA0 and SA1 faults on a HALF-ADDER circuit
+                </h6>
+            </div>
+
+        </div>
+    </nav>
     <div class="container-fluid">
-        <div class="sidebar">
+
+        <div class="sidebar inline-block">
 <!--            <iframe src="sidebar.html"></iframe>-->
             <div class="section">
                 <a href="index.html" class="section-link">Aim</a>
@@ -29,6 +49,93 @@
             <div class="section">
                 <a href="simulation.html" class="section-link">Simulation</a>
             </div>
+        </div>
+
+        <div class="procedure inline-block">
+
+            <div class="instructions">
+                <h3 style="text-decoration: underline; margin:10px 10px 20px 10px;">
+                    Steps for simulation
+                </h3>
+                <ul>
+                    <li class="step">
+                        Press the <img src="images/Add-button.PNG" class="inline-block procedure-button"> button to add basic state of your output in the given table.
+                    </li>
+
+                    <li class="step">
+                        Press the switches to select the required inputs "X" and "Y".
+                    </li>
+
+
+                    <li class="step">
+                        <p style="margin: 2px">
+                            Click on any wire successively to make it SA0, SA1, and back to normal
+                        </p>
+                        <p>
+                            Hover on the wire to see it's current state.
+                        </p>
+                        <p style="font-style: italic;">
+                            Creating SA0 and SA1 faults in a wire
+                        </p>
+
+                        <aside class="wire-color-aside">
+                            <h6 style="">
+                                WIRE COLOURS
+                            </h6>
+                            <div class="wire-color-legend">
+                                <div>
+                                    <button class="wire wire-h default"></button>
+                                    <label>Normal (no fault)</label>
+                                </div>
+                                <div>
+                                    <button class="wire wire-h stuck-at-zero"></button>
+                                    <label>Stuck at 0</label>
+                                </div>
+                                <div>
+                                    <button class="wire wire-h stuck-at-one"></button>
+                                    <label>Stuck at 1</label>
+                                </div>
+
+                            </div>
+                        </aside>
+                        <div class="center">
+                            <div>
+                                <img src="images/Wire-Default.png" class="wire-demo">
+                            </div>
+                            <div>
+                                <img src="images/Wire-SA0.png" class="wire-demo">
+                            </div>
+                            <div>
+                                <img src="images/Wire-SA1.png" class="wire-demo">
+                            </div>
+                        </div>
+
+
+
+                    </li>
+
+
+                    <li class="step">
+                        Press the <img src="images/Add-button.PNG" class="inline-block procedure-button"> button to add your inputs and outputs in the given table.
+                    </li>
+
+                    <li class="step">
+                        Try making different wires SA0 and SA1 and add their corresponding outputs in the truth table
+                    </li>
+
+                    <li class="step">
+                        Press the <img src="images/Generate-button.PNG" class="inline-block procedure-button"> button to generate output for all possible X and Y values
+                        keeping the SA0 and SA1 wires fixed.
+                    </li>
+
+                    <li class="step">
+                        Press the <img src="images/Reset-Button.PNG" class="inline-block procedure-button"> button whenever you want to refresh your simulator.
+                    </li>
+                </ul>
+
+
+            </div>
+
         </div>
     </div>
 </body>

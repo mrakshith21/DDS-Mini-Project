@@ -1,0 +1,28 @@
+nav{
+    position: fixed;
+}
+
+.brb{
+    margin-right: 10px;
+    margin-top: 0px;
+}
+
+.brb-bg{
+    background-color: #1f1f1f;
+}
+
+.banner-text{
+    vertical-align: middle;
+    font-size: 12px !important;
+    margin-right: 0px;
+}
+
+.navbar-header{
+    color: #26C6DA;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.navbar-row{
+    width: 100%;
+}
