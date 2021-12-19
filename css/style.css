@@ -5,7 +5,7 @@ html{
 body{
     height: 100%;
     overflow: scroll;
-    min-width: 1070px;
+    min-width: 1170px;
 }
 
 iframe{
@@ -13,7 +13,7 @@ iframe{
 }
 
 .container-fluid{
-    padding: 70px 0px 0px 0px;
+    padding: 67px 0px 0px 0px;
     height: 100%;
 }
 
@@ -76,9 +76,10 @@ iframe{
     margin-bottom: 30px;
 }
 
-.wire{
+.wire, .wire:hover, .wire:active, .wire:focus{
     padding: 0;
     border: none;
+    outline: none;
 }
 
 
