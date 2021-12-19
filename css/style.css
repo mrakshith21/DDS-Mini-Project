@@ -17,6 +17,14 @@ iframe{
     height: 100%;
 }
 
+.times-new-roman{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.sidebar-font{
+    font-family: 'Verdana';
+}
+
 .center{
     text-align: center;
 }

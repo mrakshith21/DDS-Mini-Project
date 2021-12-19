@@ -286,6 +286,11 @@
 
         .menu{
            margin-left: 5px;
+           background-color: #E0E0E0;
+        }
+
+        .menu:hover, .menu:focus, .menu:active{
+            background-color: #BDBDBD;
         }
 
         .dropdown-menu{
@@ -327,11 +332,11 @@
     <div class="container-fluid">
         <div class="">
             <div class="dropdown">
-            <span class="btn dropdown-toggle contents" type="button" data-toggle="dropdown" >
+            <span class="btn dropdown-toggle menu" type="button" data-toggle="dropdown" >
 <!--                <span class="navbar-toggle-icon"></span></button>-->
-                <i class="bi bi-list menu fa-4x"></i>
+                <i class="bi bi-list "></i>
             </span>
-                <ol class="dropdown-menu" style="border: 1px solid black;">
+                <ol class="dropdown-menu sidebar-font" style="border: 1px solid black;">
                     <li class="dropdown-item section">
                         <a href="index.html" class="section-link ">Aim</a>
                     </li>
@@ -342,7 +347,7 @@
                         <a href="procedure.html" class="section-link">Procedure</a>
                     </li>
                     <li class="dropdown-item section selected">
-                        <a href="simulation.html" class="section-link text-white">Simulator</a>
+                        <a href="simulation.html" class="section-link text-white">Simulation</a>
                     </li>
                 </ol>
             </div>
