@@ -50,9 +50,9 @@
 
         const classNames = ['default', 'stuck-at-zero', 'stuck-at-one'];
         const descriptions = [
-            'No fault in the wire, click to make it stuck at zero',
-            'Stuck at zero, click to make it stuck at one',
-            'Stuck at one, click to make it fault-free',
+            'No fault in the wire, click to make it SA0',
+            'SA0, click to make it SA1',
+            'SA1, click to make it fault-free',
         ];
 
         let X = 0, Y = 0;
@@ -382,11 +382,11 @@
                                 </div>
                                 <div>
                                     <button class="wire wire-h stuck-at-zero"></button>
-                                    <label>Stuck at 0</label>
+                                    <label>SA0</label>
                                 </div>
                                 <div>
                                     <button class="wire wire-h stuck-at-one"></button>
-                                    <label>Stuck at 1</label>
+                                    <label>SA1</label>
                                 </div>
 
                             </div>
@@ -553,8 +553,8 @@
                             <thead class="">
                             <tr class="center">
                                 <th colspan="3"></th>
-                                <th colspan="2">Actual</th>
-                                <th colspan="2">Fault</th>
+                                <th colspan="2">Without fault</th>
+                                <th colspan="2">With fault</th>
                                 <th ></th>
                             </tr>
                             </thead>
