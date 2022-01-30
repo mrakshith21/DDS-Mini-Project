@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aim</title>
+    <title>Title</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -12,14 +12,9 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/banner.css" />
     <link rel="stylesheet" type="text/css" href="../css/sidebar-style.css" />
-
-    <style>
-        ol li{
-            list-style-type: none;
-        }
-    </style>
 </head>
 <body>
+
     <nav class="navbar header">
         <div class="row text-white navbar-row ">
             <div class="col-2">
@@ -35,14 +30,14 @@
                     Detection of SA0 and SA1 faults on a HALF-ADDER circuit
                 </h6>
             </div>
+
         </div>
     </nav>
     <div class="container-fluid">
-
         <div class="sidebar inline-block sidebar-font">
-<!--            <iframe src="sidebar.html"></iframe>-->
-            <div class="section selected">
-                <a href="index.html" class="section-link selected">Aim</a>
+            <!--            <iframe src="sidebar.html"></iframe>-->
+            <div class="section">
+                <a href="index.html" class="section-link">Aim</a>
             </div>
             <div class="section">
                 <a href="theory.html" class="section-link">Theory</a>
@@ -59,67 +54,33 @@
             <div class="section">
                 <a href="posttest.html" class="section-link">Posttest</a>
             </div>
-            <div class="section">
-                <a href="references.html" class="section-link">References</a>
+            <div class="section selected">
+                <a href="references.html" class="section-link selected">Reference</a>
             </div>
         </div>
-
-        <div class = 'text-body'>
-            <div style = "text-align: center;">
-                <h2>   
-                <b>
-                    Detection of SA0 and SA1 faults on HALF-ADDER circuit implemented by AND, OR gates
-                </b>
-                <hr>
-                </h2>
-                
-            </div>
+        <div class = "text-body">
             <div class = "text-regular">
-                <br>
                 <p>
-                    To implement half adder in HDL using 3 AND gates and 1 OR gate and analyse the truth table of half adder with SA1 or SA0 faults and find test vectors to detect every possible fault.
+                    This experiment is developed by Dr. Biswajit R. Bhowmik and his UG students :
+                    <ol class="list-group" style="margin-left: 20px">
+                        <li>Rohan Rajaram Kamat</li>
+                        <li>Abhishek S</li>
+                        <li>Rakshith M</li>
+                        <li>Gokulraj M</li>
+                        <li>Amogh Umesh</li>
+                    </ol>
                 </p>
             </div>
-            
-        </div>
-
-        
-    </div>
-
-    <div>
-        <div class="modal fade times-new-roman" id="aboutModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" style="font-weight: bold">About Project</h5>
-                        <button type="button" class="btn close  " style="border: none" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h6>Project 8 done by group 8 under guidance of Prof. Biswajit R</h6>
-
-                        <p>
-                            <p style="margin: 0">Group Members </p>
-                            <hr style="margin: 10px; padding: 0">
-                            <ol class="list-group">
-                                <li>Rohan Rajaram Kamat(201CS147) </li>
-                                <li>Abhishek S(201CS103) </li>
-                                <li>Rakshith M(201CS146)</li>
-                                <li>Gokulraj M(201CS218) </li>
-                                <li>Amogh Umesh(201CS207) </li>
-                            </ol>
-                        </p>
-
-                    </div>
-                </div>
+            <div class = "text-regular">
+                <p>
+                    Department of Computer Science and Engineering
+                    <br>
+                    National Institute of Technology Karnataka
+                </p>
             </div>
+
         </div>
     </div>
-    <script>
-        function showAbout(){
-            $('#aboutModal').modal('show');
-        }
-    </script>
+
 </body>
 </html>

@@ -371,3 +371,25 @@ aside{
     font-family: 'Times New Roman', Times, serif;
     font-size: larger;
 }
+
+.question{
+    margin: 40px 0;
+}
+
+.question-img{
+    margin: 10px 20px;
+}
+
+.progress{
+    width: 30%;
+}
+
+#result-div{
+    visibility: hidden;
+    margin: 30px 0;
+    height: 100px;
+}
+
+#result-label{
+    margin-bottom: 10px;
+}
