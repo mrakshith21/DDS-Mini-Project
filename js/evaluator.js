@@ -26,4 +26,5 @@ function evaluateSubmission(questions){
     result.setAttribute('aria-valuenow', correct.toString());
     result.style.width = ((100 * correct) / questions.length).toString() + '%';
     document.getElementById('result-label').innerHTML = 'You answered ' + correct + ' out of ' + questions.length + ' questions correctly';
+    window.scrollTo(0,document.body.scrollHeight);
 }
