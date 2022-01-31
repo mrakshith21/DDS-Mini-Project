@@ -53,6 +53,17 @@ pretestQuestions = [
             'The fault in the circuit cannot be represented as SA0 or SA1'
         ],
         1
+    ],
+    [
+        'Which of the following is true?',
+        undefined,
+        [
+            'Only 1 test vector can be used to determine a particular stuck at fault',
+            'Only 1 stuck at fault can be detected by a particular test vector',
+            'Stuck at fault is a logical defect',
+            'There can be multiple stuck at faults in the given circuit'
+        ],
+        4
     ]
 ]
 

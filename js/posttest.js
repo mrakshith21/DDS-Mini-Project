@@ -14,8 +14,8 @@ posttestQuestions = [
         undefined,
         [
             'SA0 fault in one of the inputs of AND gate and an SA0 fault in the other input of a different AND gate',
-            'SA0 fault in an input of an AND gate and an SA0 fault in the output of another AND gate\n',
-            'SA1 fault in an input of OR gate and an SA1 fault in output of another OR gate\n',
+            'SA0 fault in an input of an AND gate and an SA0 fault in the output of another AND gate',
+            'SA1 fault in an input of OR gate and an SA1 fault in output of another OR gate',
             'All of these'
         ],
         4
@@ -32,7 +32,17 @@ posttestQuestions = [
         ],
         4
     ],
-    // add here
+    [
+        'Which stuck at fault will be detected for the input A = 1, B = 1',
+        'q3.png',
+        [
+            'Stuck at 1 for wire Sai',
+            'Stuck at 1 for wire Sbi',
+            'Stuck at 0 for wire Saii',
+            'Stuck at 1 for wire Sbii',
+        ],
+        3
+    ],
     [
         'For X = 1 and Y = 0 in the following figure, select the correct statement',
         'q4.jfif',
@@ -41,6 +51,17 @@ posttestQuestions = [
             'Output will be 0 with fault detected',
             'Output will be 1 with no fault detected',
             'Output will be 0 with no fault detected'
+        ],
+        3
+    ],
+    [
+        'How many stuck at faults can be detected by the input X = 0, Y = 1 in the half adder shown below?',
+        'q1.png',
+        [
+            '4',
+            '5',
+            '6',
+            '7'
         ],
         3
     ]

@@ -9,7 +9,7 @@ function evaluateSubmission(questions){
             let label = document.getElementById('q' + (i + 1) + 'o' + (j + 1) + 'label');
             if(option.checked){
                 if(question.correct === j + 1){
-                    label.style.color = 'green';
+                    label.style.color = '#388E3C';
                     correct++;
                 }
                 else{
